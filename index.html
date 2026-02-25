@@ -3,74 +3,351 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cafe Aroma</title>
+<title>Premium Cafe</title>
 
 <style>
 
 /* ===== GLOBAL ===== */
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: 'Segoe UI', sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+scroll-behavior:smooth;
 }
 
 body{
-    background: linear-gradient(135deg,#fdfbfb,#e6f0ff,#fff6e6);
-    color:#2c3e50;
-    overflow-x:hidden;
+background:linear-gradient(135deg,#fdfbfb,#e6f0ff,#fff6e6);
+color:#2c3e50;
+overflow-x:hidden;
 }
 
 /* ===== NAVBAR ===== */
 .navbar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:20px 60px;
-    background:white;
-    box-shadow:0 4px 15px rgba(0,0,0,0.08);
-    animation: fadeDown 1s ease forwards;
+position:fixed;
+top:0;
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 60px;
+background:rgba(255,255,255,0.75);
+backdrop-filter:blur(12px);
+z-index:1000;
+transition:0.4s;
+}
+
+.navbar.scrolled{
+box-shadow:0 8px 30px rgba(0,0,0,0.1);
 }
 
 .logo img{
-    height:60px;
+height:60px;
 }
 
 .nav-links a{
-    text-decoration:none;
-    margin-left:30px;
-    font-weight:600;
-    color:#2c3e50;
-    position:relative;
-    transition:0.3s;
+text-decoration:none;
+margin-left:30px;
+font-weight:600;
+color:#2c3e50;
+transition:0.3s;
+position:relative;
 }
 
 .nav-links a::after{
-    content:"";
-    position:absolute;
-    left:0;
-    bottom:-5px;
-    width:0%;
-    height:2px;
-    background:#ff914d;
-    transition:0.4s;
+content:"";
+position:absolute;
+bottom:-5px;
+left:0;
+width:0%;
+height:2px;
+background:#ff7a00;
+transition:0.4s;
 }
 
 .nav-links a:hover::after{
-    width:100%;
+width:100%;
 }
 
 /* ===== HERO ===== */
 .hero{
-    text-align:center;
-    padding:90px 20px 50px;
-    animation: fadeUp 1.2s ease forwards;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+background:linear-gradient(rgba(255,255,255,0.75),rgba(255,255,255,0.75)),
+url('https://images.unsplash.com/photo-1509042239860-f550ce710b93');
+background-size:cover;
+background-attachment:fixed;
 }
 
 .hero h1{
-    font-size:44px;
-    margin-bottom:15px;
+font-size:55px;
+animation:float 3s ease-in-out infinite;
 }
+
+.hero p{
+font-size:20px;
+margin-top:15px;
+}
+
+/* ===== SECTIONS ===== */
+.section{
+padding:120px 80px;
+opacity:0;
+transform:translateY(80px);
+transition:1s;
+}
+
+.section.active{
+opacity:1;
+transform:translateY(0);
+}
+
+/* ===== MENU GRID ===== */
+.menu-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+}
+
+.menu-card{
+background:rgba(255,255,255,0.65);
+backdrop-filter:blur(15px);
+padding:25px;
+border-radius:20px;
+box-shadow:0 15px 40px rgba(0,0,0,0.1);
+transition:0.4s;
+}
+
+.menu-card:hover{
+transform:translateY(-12px) scale(1.03);
+box-shadow:0 25px 60px rgba(0,0,0,0.15);
+}
+
+.price{
+font-weight:bold;
+color:#ff7a00;
+margin:10px 0;
+}
+
+.menu-card input{
+width:60px;
+padding:6px;
+margin-right:10px;
+border-radius:6px;
+border:1px solid #ccc;
+}
+
+.menu-card button{
+padding:8px 16px;
+border:none;
+border-radius:8px;
+background:linear-gradient(45deg,#ff7a00,#ffb347);
+color:white;
+cursor:pointer;
+transition:0.3s;
+}
+
+.menu-card button:hover{
+transform:scale(1.1);
+box-shadow:0 8px 20px rgba(255,122,0,0.5);
+}
+
+/* ===== ORDER CENTER ===== */
+.orders{
+background:white;
+padding:40px;
+border-radius:20px;
+box-shadow:0 15px 40px rgba(0,0,0,0.1);
+}
+
+.order-list li{
+padding:10px 0;
+border-bottom:1px solid #eee;
+animation:fadeIn 0.4s ease forwards;
+}
+
+.total{
+font-size:22px;
+margin-top:15px;
+color:#ff7a00;
+font-weight:bold;
+}
+
+/* ===== CONTACT ===== */
+.contact p{
+margin:10px 0;
+font-size:18px;
+}
+
+/* ===== FOOTER ===== */
+footer{
+text-align:center;
+padding:30px;
+background:white;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes float{
+0%{transform:translateY(0);}
+50%{transform:translateY(-15px);}
+100%{transform:translateY(0);}
+}
+
+@keyframes fadeIn{
+from{opacity:0;}
+to{opacity:1;}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar" id="navbar">
+<div class="logo">
+<img src="logo.png" alt="Cafe Logo">
+</div>
+<div class="nav-links">
+<a href="#contact">Contact</a>
+<a href="#orders">My Orders</a>
+</div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+<h1>Premium Coffee Experience</h1>
+<p>Scroll Down & Order Your Favorite Brew</p>
+</section>
+
+<!-- MENU SECTION -->
+<section class="section" id="menu">
+<h2>Our Coffee Menu</h2>
+<br>
+<div class="menu-grid">
+
+<div class="menu-card">
+<h3>Espresso</h3>
+<div class="price">₹120</div>
+<input type="number" value="1" min="1">
+<button onclick="addOrder('Espresso',120,this)">Order</button>
+</div>
+
+<div class="menu-card">
+<h3>Cappuccino</h3>
+<div class="price">₹180</div>
+<input type="number" value="1" min="1">
+<button onclick="addOrder('Cappuccino',180,this)">Order</button>
+</div>
+
+<div class="menu-card">
+<h3>Latte</h3>
+<div class="price">₹200</div>
+<input type="number" value="1" min="1">
+<button onclick="addOrder('Latte',200,this)">Order</button>
+</div>
+
+<div class="menu-card">
+<h3>Mocha</h3>
+<div class="price">₹220</div>
+<input type="number" value="1" min="1">
+<button onclick="addOrder('Mocha',220,this)">Order</button>
+</div>
+
+<div class="menu-card">
+<h3>Cold Brew</h3>
+<div class="price">₹240</div>
+<input type="number" value="1" min="1">
+<button onclick="addOrder('Cold Brew',240,this)">Order</button>
+</div>
+
+<div class="menu-card">
+<h3>Caramel Macchiato</h3>
+<div class="price">₹260</div>
+<input type="number" value="1" min="1">
+<button onclick="addOrder('Caramel Macchiato',260,this)">Order</button>
+</div>
+
+</div>
+</section>
+
+<!-- ORDER SECTION CENTER -->
+<section class="section" id="orders">
+<div class="orders">
+<h2>My Orders</h2>
+<ul id="orderList" class="order-list"></ul>
+<div class="total">Total: ₹<span id="totalPrice">0</span></div>
+</div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact" id="contact">
+<h2>Contact Us</h2>
+<p>Email: cafe@premium.com</p>
+<p>Phone: +91 9876543210</p>
+</section>
+
+<footer>
+© 2026 Premium Cafe | Bright Aesthetic Professional Website
+</footer>
+
+<script>
+
+/* NAVBAR SHADOW */
+window.addEventListener("scroll", function(){
+document.getElementById("navbar")
+.classList.toggle("scrolled", window.scrollY > 50);
+});
+
+/* SCROLL REVEAL */
+const sections=document.querySelectorAll(".section");
+window.addEventListener("scroll",()=>{
+sections.forEach(sec=>{
+const top=sec.getBoundingClientRect().top;
+if(top<window.innerHeight-100){
+sec.classList.add("active");
+}
+});
+});
+
+/* ORDER SYSTEM */
+let total=0;
+
+function animateValue(start,end,duration){
+let startTime=null;
+function animation(currentTime){
+if(!startTime)startTime=currentTime;
+const progress=currentTime-startTime;
+const value=Math.floor(progress/duration*(end-start)+start);
+document.getElementById("totalPrice").textContent=value;
+if(progress<duration){
+requestAnimationFrame(animation);
+}else{
+document.getElementById("totalPrice").textContent=end;
+}
+}
+requestAnimationFrame(animation);
+}
+
+function addOrder(item,price,btn){
+const qty=btn.previousElementSibling.value;
+const list=document.getElementById("orderList");
+const li=document.createElement("li");
+li.innerText=item+" x "+qty+" = ₹"+(price*qty);
+list.appendChild(li);
+let oldTotal=total;
+total+=price*qty;
+animateValue(oldTotal,total,500);
+}
+
+</script>
+
+</body>
+</html>}
 
 .hero p{
     font-size:18px;
