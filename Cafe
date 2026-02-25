@@ -1,1 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cafe Aroma</title>
 
+<style>
+
+/* ===== GLOBAL ===== */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+    background: linear-gradient(135deg,#fdfbfb,#e6f0ff,#fff6e6);
+    color:#2c3e50;
+    overflow-x:hidden;
+}
+
+/* ===== NAVBAR ===== */
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 60px;
+    background:white;
+    box-shadow:0 4px 15px rgba(0,0,0,0.08);
+    animation: fadeDown 1s ease forwards;
+}
+
+.logo img{
+    height:60px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    margin-left:30px;
+    font-weight:600;
+    color:#2c3e50;
+    position:relative;
+    transition:0.3s;
+}
+
+.nav-links a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-5px;
+    width:0%;
+    height:2px;
+    background:#ff914d;
+    transition:0.4s;
+}
+
+.nav-links a:hover::after{
+    width:100%;
+}
+
+/* ===== HERO ===== */
+.hero{
+    text-align:center;
+    padding:90px 20px 50px;
+    animation: fadeUp 1.2s ease forwards;
+}
+
+.hero h1{
+    font-size:44px;
+    margin-bottom:15px;
+}
+
+.hero p{
+    font-size:18px;
+    color:#666;
+}
+
+/* ===== MAIN CONTAINER ===== */
+.container{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:40px;
+    padding:50px 80px;
+}
+
+/* ===== MENU SECTION ===== */
+.menu{
+    background:white;
+    padding:30px;
+    border-radius:16px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+    animation: slideLeft 1.2s ease forwards;
+}
+
+.menu-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+    padding:15px;
+    border-radius:10px;
+    transition:0.3s;
+}
+
+.menu-item:hover{
+    background:#fff3e6;
+    transform:translateY(-5px);
+    box-shadow:0 6px 20px rgba(0,0,0,0.08);
+}
+
+.menu-item span{
+    font-weight:bold;
+    color:#ff7a00;
+}
+
+.menu-item input{
+    width:60px;
+    padding:5px;
+    margin-right:10px;
+    border:1px solid #ccc;
+    border-radius:6px;
+}
+
+.menu-item button{
+    padding:8px 16px;
+    border:none;
+    background:linear-gradient(45deg,#ff7a00,#ffb347);
+    color:white;
+    border-radius:8px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.menu-item button:hover{
+    transform:scale(1.05);
+    box-shadow:0 6px 15px rgba(255,122,0,0.4);
+}
+
+/* ===== ORDER SECTION ===== */
+.orders{
+    background:white;
+    padding:30px;
+    border-radius:16px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+    animation: slideRight 1.2s ease forwards;
+}
+
+.order-list li{
+    padding:8px 0;
+    border-bottom:1px solid #eee;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.total{
+    font-weight:bold;
+    font-size:20px;
+    margin-top:15px;
+    color:#ff7a00;
+}
+
+/* ===== FOOTER ===== */
+footer{
+    text-align:center;
+    padding:20px;
+    background:white;
+    margin-top:40px;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeDown{
+    from{opacity:0; transform:translateY(-40px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+@keyframes fadeUp{
+    from{opacity:0; transform:translateY(40px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+@keyframes slideLeft{
+    from{opacity:0; transform:translateX(-60px);}
+    to{opacity:1; transform:translateX(0);}
+}
+
+@keyframes slideRight{
+    from{opacity:0; transform:translateX(60px);}
+    to{opacity:1; transform:translateX(0);}
+}
+
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="logo">
+        <img src="logo.png" alt="Cafe Logo">
+    </div>
+
+    <div class="nav-links">
+        <a href="#">Contact</a>
+        <a href="#">My Orders</a>
+    </div>
+</div>
+
+<section class="hero">
+    <h1>Premium Coffee Experience</h1>
+    <p>Order your favorite coffee with a smooth and aesthetic interface.</p>
+</section>
+
+<div class="container">
+
+    <div class="menu">
+        <h2>Our Coffee Menu</h2>
+
+        <div class="menu-item">
+            <div>
+                <h4>Espresso</h4>
+                <span>₹120</span>
+            </div>
+            <div>
+                <input type="number" min="1" value="1">
+                <button onclick="addOrder('Espresso',120,this)">Order</button>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <div>
+                <h4>Cappuccino</h4>
+                <span>₹180</span>
+            </div>
+            <div>
+                <input type="number" min="1" value="1">
+                <button onclick="addOrder('Cappuccino',180,this)">Order</button>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <div>
+                <h4>Latte</h4>
+                <span>₹200</span>
+            </div>
+            <div>
+                <input type="number" min="1" value="1">
+                <button onclick="addOrder('Latte',200,this)">Order</button>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <div>
+                <h4>Mocha</h4>
+                <span>₹220</span>
+            </div>
+            <div>
+                <input type="number" min="1" value="1">
+                <button onclick="addOrder('Mocha',220,this)">Order</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="orders">
+        <h2>My Orders</h2>
+        <ul class="order-list" id="orderList"></ul>
+        <div class="total">Total: ₹<span id="totalPrice">0</span></div>
+    </div>
+
+</div>
+
+<footer>
+    © 2026 Cafe Aroma | Bright Aesthetic Professional Design
+</footer>
+
+<script>
+let total = 0;
+
+function animateValue(start, end, duration) {
+    let startTime = null;
+    function animation(currentTime) {
+        if (!startTime) startTime = currentTime;
+        const progress = currentTime - startTime;
+        const value = Math.floor(progress / duration * (end - start) + start);
+        document.getElementById("totalPrice").textContent = value;
+        if (progress < duration) {
+            requestAnimationFrame(animation);
+        } else {
+            document.getElementById("totalPrice").textContent = end;
+        }
+    }
+    requestAnimationFrame(animation);
+}
+
+function addOrder(item, price, button){
+    const quantity = button.previousElementSibling.value;
+    const orderList = document.getElementById("orderList");
+
+    const li = document.createElement("li");
+    li.textContent = item + " x " + quantity + " = ₹" + (price * quantity);
+    orderList.appendChild(li);
+
+    let oldTotal = total;
+    total += price * quantity;
+    animateValue(oldTotal, total, 500);
+}
+</script>
+
+</body>
+</html>
